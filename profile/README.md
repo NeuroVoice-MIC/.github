@@ -5,8 +5,8 @@
 ### End-to-End Architecture Overview
 
 <p align="center">
-  <img src=".github/assets/one" width="48%">
-  <img src=".github/assets/two" width="48%">
+  <img src=".github/assets/one.jpeg" width="48%">
+  <img src=".github/assets/two.jpeg" width="48%">
 </p>
 ---
 
