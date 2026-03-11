@@ -1,12 +1,13 @@
-<p align="center">
-  <img src=".github/assets/WhatsApp Image 2026-03-11 at 18.36.48.jpeg" width="48%">
-  <img src=".github/assets/WhatsApp Image 2026-03-11 at 18.36.52.jpeg" width="48%">
-</p>
+
 
 # NEUROVOICE
 ## Progressive AI Screening and Monitoring System
 ### End-to-End Architecture Overview
 
+<p align="center">
+  <img src=".github/assets/one" width="48%">
+  <img src=".github/assets/two" width="48%">
+</p>
 ---
 
 ## 1. PROBLEM CONTEXT
