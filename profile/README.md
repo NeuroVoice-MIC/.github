@@ -1,123 +1,183 @@
-# 
+<p align="center">
+  <img src=".github/assets/WhatsApp Image 2026-03-11 at 18.36.48.jpeg" width="48%">
+  <img src=".github/assets/WhatsApp Image 2026-03-11 at 18.36.52.jpeg" width="48%">
+</p>
 
 # NEUROVOICE
-## Azure-Based Progressive AI Screening System
-### Eraser Board – End-to-End Architecture Document
-### 1st Runner Up - HackTU 7.0
+## Progressive AI Screening and Monitoring System
+### End-to-End Architecture Overview
+
 ---
 
 ## 1. PROBLEM CONTEXT
-Parkinson’s Disease (PD) is a progressive neurological disorder where **speech and facial expression changes appear early**, often before clinical diagnosis. Traditional diagnosis is expensive, specialist-driven, and inaccessible at scale.
 
-**Goal:**
+Parkinson’s Disease (PD) is a progressive neurological disorder where **speech, facial expression, and movement changes often appear early**, sometimes even before formal clinical diagnosis. Traditional diagnostic pathways are specialist-driven, expensive, and difficult to scale across large populations.
+
+**Goal**
+
 Build a **non-diagnostic, ethical, scalable screening system** that:
 
-- Uses **voice as the first signal**
-- Escalates to **facial analysis only when required**
-- Tracks **change over time**, not just one-time prediction
-- Produces **explainable, clinician-ready outputs**
+- Uses **voice as the primary signal**
+- Escalates to **additional analysis only when necessary**
+- Tracks **changes over time rather than one-time predictions**
+- Produces **clear and explainable outputs**
+
 ---
 
-## 2. SOLUTION OVERVIEW (WHAT WE BUILT)
-**NeuroVoice** is a **progressive, multimodal AI screening platform** deployed on **Microsoft Azure**, consisting of:
+## 2. SOLUTION OVERVIEW
 
-- **Two AI Levels**
-    - Level 1: Voice-based screening (default)
-    - Level 2: Facial expression analysis (conditional)
+**NeuroVoice** is a **progressive multimodal AI screening and monitoring system** designed to identify potential early signals associated with Parkinson’s.
 
-- **Two Dashboards**
-    - User Dashboard (simple, reassuring)
-    - Clinician Dashboard (detailed, explainable)
+The system is built around three main ideas:
 
-- **Azure-native, serverless architecture**
-- **Explainable AI at every decision point**
+- **Voice-first screening**
+- **Conditional deeper analysis**
+- **Longitudinal monitoring**
+
+### Core Components
+
+**AI Levels**
+
+- Level 1: Voice-based screening (default)
+- Level 2: Facial expression analysis (conditional)
+- Motor and movement monitoring modules
+
+**Dashboards**
+
+- User Dashboard (simple and reassuring)
+- Clinician Dashboard (detailed and interpretable)
+
+**System Principles**
+
+- Modular architecture
+- Progressive escalation
+- Explainable outputs
+- Long-term monitoring capability
+
 ---
 
-## 3. HIGH-LEVEL ERASER FLOW
+## 3. HIGH LEVEL SYSTEM FLOW
+
 ```
-User Mobile App
-      ↓
+User App
+   ↓
 Consent & Onboarding
-      ↓
+   ↓
 Level 1: Voice Capture
-      ↓
-Voice AI (Azure ML)
-      ↓
+   ↓
+Voice Analysis
+   ↓
 Risk + Explainability
-      ↓
+   ↓
  ┌───────────────┐
  │               │
 Low Risk     Medium / High Risk
  │               │
  ↓               ↓
-User Trends   Level 2 Unlock
+Trend View   Level 2 Unlock
                  ↓
-         Facial Expression Capture
+         Facial / Motor Capture
                  ↓
-         Facial AI (Azure ML)
+         Multimodal Analysis
                  ↓
-         Combined Risk Engine
+         Combined Assessment Layer
                  ↓
          Clinician Dashboard
 ```
+
 ---
 
-## 4. ACTORS & INTERFACES
-### Actor 1: User (Patient / Individual)
-- Smartphone-based
+## 4. ACTORS AND INTERFACES
+
+### User (Individual)
+
+Interaction through a **mobile interface**.
+
+Capabilities:
+
 - Daily voice recordings
-- Optional facial video
-- Sees trends, not diagnosis
-### Actor 2: Clinician / Researcher
-- Web dashboard
-- Longitudinal tracking
-- Explainable insights
-- Exportable screening reports
+- Optional facial recordings
+- Motor and movement interaction tasks
+- Trend tracking over time
+
+The system shows **patterns and trends instead of diagnoses**.
+
 ---
 
-## 5. LEVEL 1 — VOICE AI SCREENING (DEFAULT)
+### Clinician / Researcher
+
+Access through a **web dashboard**.
+
+Capabilities:
+
+- Longitudinal monitoring
+- Explainable AI insights
+- Signal contribution analysis
+- Exportable monitoring summaries
+
+---
+
+## 5. LEVEL 1 — VOICE SCREENING
+
 ### Purpose
-Detect **early speech deviations** associated with Parkinson’s risk using a low-friction method.
+
+Detect **speech-related deviations** associated with Parkinson’s risk using a low-friction interaction.
 
 ### Input
-- 20–30 second guided speech task
-- Works on any smartphone
+
+- 20–30 second guided speech recording
+- Smartphone-based capture
 - No camera required
-### Azure Voice Pipeline
+
+### Voice Processing Pipeline
+
 ```
 Audio Upload
    ↓
-Azure Function (Quality Check)
+Quality Check
    ↓
 Feature Extraction
    ↓
-Azure ML Voice Models
+Voice Models
    ↓
 Risk Score + Confidence
    ↓
-SHAP Explainability
+Explainability Layer
 ```
-### Models Used (Ensemble)
-- Feature-based model (Random Forest / Linear)
-- Temporal model (LSTM / GRU)
-- Spectrogram-based CNN
+
+### Models Used
+
+- Feature based model
+- Temporal sequence model
+- Spectrogram based model
+
 ### Output
-- Risk Category: Low / Medium / High
-- Confidence (audio quality-aware)
-- Feature-level explanations
+
+- Risk category: Low / Medium / High
+- Confidence score
+- Feature level explanations
+
 ---
 
-## 6. LEVEL 2 — FACIAL EXPRESSION AI (CONDITIONAL)
+## 6. LEVEL 2 — FACIAL EXPRESSION ANALYSIS
+
 ### Trigger
-- Activated **only if Level 1 risk ≥ threshold**
-- Or explicit user consent
+
+Activated when:
+
+- Level 1 risk crosses a threshold
+- Or the user provides explicit consent
+
 ### Input
-- Short selfie video (5–10 seconds)
-### Azure Facial Pipeline
+
+Short selfie video (5–10 seconds)
+
+### Facial Analysis Pipeline
+
 ```
 Video Upload
    ↓
-Azure Function (Frame Extraction)
+Frame Extraction
    ↓
 Face Landmark Detection
    ↓
@@ -125,105 +185,135 @@ Temporal Facial Dynamics Model
    ↓
 Facial Risk Score
 ```
-### Features Analyzed
-- Facial rigidity (hypomimia)
+
+### Signals Studied
+
+- Facial rigidity
 - Blink rate
 - Mouth symmetry
-- Micro-movement stability
-### Key Design Choice
-- Facial model is **independent** from voice model
-- No forced multimodal fusion
+- Micro movement stability
+
+### Design Principle
+
+The facial model is **independent from the voice model**, ensuring modular and explainable system behavior.
+
 ---
 
-## 7. MULTI-MODAL DECISION ENGINE
-**Fusion occurs at decision level, not raw data level.**
+## 7. MOTOR AND MOVEMENT MODULES
+
+The system also supports **movement-based monitoring** to observe motor patterns over time.
+
+Example tasks:
+
+- Finger tapping tests
+- Handwriting and drawing tasks
+- Arm swing observation
+- Posture and guided movement tracking
+
+These modules support **longitudinal monitoring and rehabilitation-oriented interaction**.
+
+---
+
+## 8. MULTIMODAL DECISION ENGINE
+
+Fusion occurs at the **decision level rather than the raw data level**.
 
 ```
 Voice Risk Score
 Facial Risk Score
+Motor Signals
 Confidence Weights
         ↓
-Final Screening Assessment
+Final Screening / Monitoring Assessment
 ```
-Benefits:
 
-- Works even if one modality is missing
+### Benefits
+
+- Works even when one modality is missing
 - Easier explainability
-- Safer ethically
-- More robust in real-world conditions
-Implemented using **Azure Functions**.
+- Safer and modular design
+- More robust real-world performance
 
 ---
 
-## 8. DUAL DASHBOARD DESIGN
-### A. USER DASHBOARD (Mobile)
-**Objective:** Awareness, reassurance, continuity
+## 9. DASHBOARD DESIGN
+
+### User Dashboard
+
+Objective: **awareness and reassurance**
 
 Features:
 
-- Daily risk indicator
+- Daily status indicator
 - Trend vs personal baseline
-- Simple explanations
-- Privacy & consent controls
-Example:
+- Confidence indicator
+- Privacy and consent controls
+
+Example output
 
 ```
 Status: Low Risk
 Trend: Stable
 Confidence: High
 ```
+
 ---
 
-### B. CLINICIAN DASHBOARD (Web)
-**Objective:** Clinical interpretability and monitoring
+### Clinician Dashboard
+
+Objective: **interpretability and monitoring**
 
 Features:
 
 - Longitudinal timelines
-- SHAP-based explanations
-- Voice vs facial contribution split
-- Exportable screening report (PDF)
-Example Insights:
+- Feature contribution insights
+- Voice vs facial signal split
+- Structured monitoring summaries
+
+Example insights
 
 - Voice contribution: 65%
 - Facial contribution: 35%
-- Key drivers: pause duration, blink rate, pitch instability
+- Key signals: pause duration, blink rate, pitch instability
+
 ---
 
-## 9. AZURE SERVICE STACK
-| Layer | Azure Service |
-| ----- | ----- |
-| API Gateway | Azure API Management |
-| Serverless Logic | Azure Functions |
-| ML Training & Inference | Azure Machine Learning |
-| Media Storage | Azure Blob Storage |
-| Feature Storage | Azure Data Lake Gen2 |
-| Database | Azure Cosmos DB |
-| Dashboards | Azure App Service |
-| Authentication | Azure AD B2C |
-| Monitoring | Azure Monitor + App Insights |
-| Security | Azure Key Vault |
+## 10. ARCHITECTURE PRINCIPLES
+
+The system is designed around the following principles:
+
+- Progressive screening
+- Modular multimodal design
+- Explainable outputs
+- Low friction user interaction
+- Ethical and consent-aware workflows
+- Longitudinal monitoring
+
 ---
 
-## 10. DATA GOVERNANCE & ETHICS
-- Screening only (not diagnosis)
+## 11. DATA GOVERNANCE AND ETHICS
+
+- Screening system (not diagnostic)
 - Explicit uncertainty modeling
-- Consent-based escalation
+- Consent based escalation
 - Minimal raw data retention
-- Feature-level storage preferred
-- On-device + serverless hybrid processing
----
-
-## 11. WHY THIS IS AN END-TO-END SOLUTION
-✔ Progressive escalation
-✔ Multimodal but modular
-✔ Explainable by design
-✔ Azure-native scalability
-✔ Clinically usable outputs
-✔ Ethically aligned with healthcare AI standards
+- Feature level storage where possible
+- Privacy aware processing
 
 ---
 
-## 12. ONE-LINE ERASER SUMMARY
-> **“NeuroVoice is a progressive, Azure-based, explainable AI screening platform that uses voice as a first-line signal, conditionally escalates to facial analysis, and delivers dual dashboards for users and clinicians—without performing diagnosis.”**
+## 12. WHY THIS IS AN END TO END SYSTEM
 
+- Voice first screening
+- Conditional deeper analysis
+- Multimodal monitoring
+- User and clinician interfaces
+- Longitudinal data tracking
+- Explainable outputs
+- Modular real world architecture
+
+---
+
+## 13. ONE LINE SUMMARY
+
+NeuroVoice is a progressive multimodal AI screening and monitoring system that uses voice as a first signal, conditionally expands to deeper analysis, and supports long-term monitoring through interpretable outputs for users and clinicians.
