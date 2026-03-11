@@ -4,10 +4,9 @@
 ## Progressive AI Screening and Monitoring System
 ### End-to-End Architecture Overview
 
-<p align="center">
-  <img src=".github/assets/one.jpeg" width="48%">
-  <img src=".github/assets/two.jpeg" width="48%">
-</p>
+![Demo](../assets/one.jpeg)
+![Demo](../assets/two.jpeg)
+
 ---
 
 ## 1. PROBLEM CONTEXT
